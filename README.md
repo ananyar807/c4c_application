@@ -13,3 +13,8 @@ This is a `React` web application that shortens long URLs into more manageable a
 
 ## Testing 
 The express routes were initally tested using `Postman`, while the front end was tested using `Cypress`, an E2E testing framework. React components were also tested using `Jest` and the `React Testing Library`. Finally, the API was thoroughly tested using `supertest`, emulating HTTP requests to the Express router.
+
+## Improvements
+1. 
+2. 
+3. 
