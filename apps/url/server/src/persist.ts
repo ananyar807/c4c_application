@@ -10,6 +10,8 @@ const urlmap: Record<number, string> = {};
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import qrcode from 'qrcode';
+import validator from 'validator';
+import xss from 'xss';
 
 /**
  * Initally undefined, but we will use this mutable reference to cache the connection for future use
@@ -41,6 +43,11 @@ export async function getDB() {
 export async function shortenUrl(url: string): Promise<string> {
   const db = await getDB();
 
+  //input validation: checking if its a valid URL
+  if (!validator.isURL(url)) {
+    throw new Error('Invalid URL');
+  }
+
   const result = await db.run('INSERT INTO url (original) VALUES (?)', url);
   console.log(result);
   const id = result.lastID;
@@ -55,6 +62,11 @@ export async function shortenUrl(url: string): Promise<string> {
  */
 export async function generateQR(url: string): Promise<string> {
   const db = await getDB();
+
+  //input validation: checking if its a valid URL
+  if (!validator.isURL(url)) {
+    throw new Error('Invalid URL');
+  }
 
   const result = await db.run('INSERT INTO url (original) VALUES (?)', url);
   console.log(result);
@@ -72,5 +84,13 @@ export async function lookupUrl(shortenedId: number) {
     shortenedId
   );
   console.log(result);
-  return result.original;
+
+  //output sanitization: making sure the output is accurate and valid 
+  if (result) {
+    return xss(result.original);
+  }
+  else{
+    //wasn't sure if I should return null or an error, but I went with null for now
+    return null; 
+  }
 }
