@@ -1,4 +1,4 @@
-import { shortenUrl, lookupUrl, generateQR } from './persist';
+import { shortenUrl, lookupUrl, } from './persist';
 import { createApp } from './app';
 
 // Composition Root
