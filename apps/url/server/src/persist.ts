@@ -9,9 +9,9 @@ const urlmap: Record<number, string> = {};
 // SQL code
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
-import qrcode from 'qrcode';
+//import qrcode from 'qrcode';
 import validator from 'validator';
-import xss from 'xss';
+//import xss from 'xss';
 
 /**
  * Initally undefined, but we will use this mutable reference to cache the connection for future use
@@ -71,7 +71,7 @@ export async function generateQR(url: string): Promise<string> {
   const result = await db.run('INSERT INTO url (original) VALUES (?)', url);
   console.log(result);
   const id = result.lastID;
-  const qr = qrcode.toDataURL(url); // Generate the QR code
+  //const qr = qrcode.toDataURL(url); // Generate the QR code
 
   return qr;
 }
@@ -86,11 +86,11 @@ export async function lookupUrl(shortenedId: number) {
   console.log(result);
 
   //output sanitization: making sure the output is accurate and valid 
-  if (result) {
-    return xss(result.original);
-  }
-  else{
-    //wasn't sure if I should return null or an error, but I went with null for now
-    return null; 
-  }
+  // if (result) {
+  //   return xss(result.original);
+  // }
+  // else{
+  //   //wasn't sure if I should return null or an error, but I went with null for now
+  //   return null; 
+  // }
 }
