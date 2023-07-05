@@ -11,6 +11,9 @@ This is a `React` web application that shortens long URLs into more manageable a
 - `client2e`: Cypress project for end-to-end testing. 
 - `server`: Provides the backend code for the application.
 
+![c4cap drawio](https://github.com/ananyar807/c4c_application/assets/76761180/b3453006-cbfb-4c5e-812e-6d91e97b59c9)
+
+
 ## Testing 
 The express routes were initally tested using `Postman`, while the front end was tested using `Cypress`, an E2E testing framework. React components were also tested using `Jest` and the `React Testing Library`. Finally, the API was thoroughly tested using `supertest`, emulating HTTP requests to the Express router.
 
