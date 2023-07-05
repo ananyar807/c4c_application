@@ -60,21 +60,21 @@ export async function shortenUrl(url: string): Promise<string> {
  * Produces the qr form of a given URL
  * Effect: updates the db to record the url and its qr.
  */
-export async function generateQR(url: string): Promise<string> {
-  const db = await getDB();
+// export async function generateQR(url: string): Promise<string> {
+//   const db = await getDB();
 
-  //input validation: checking if its a valid URL
-  if (!validator.isURL(url)) {
-    throw new Error('Invalid URL');
-  }
+//   //input validation: checking if its a valid URL
+//   if (!validator.isURL(url)) {
+//     throw new Error('Invalid URL');
+//   }
 
-  const result = await db.run('INSERT INTO url (original) VALUES (?)', url);
-  console.log(result);
-  const id = result.lastID;
-  //const qr = qrcode.toDataURL(url); // Generate the QR code
+//   const result = await db.run('INSERT INTO url (original) VALUES (?)', url);
+//   console.log(result);
+//   const id = result.lastID;
+//   const qr = qrcode.toDataURL(url); // Generate the QR code
 
-  return qr;
-}
+//   return qr;
+// }
 
 export async function lookupUrl(shortenedId: number) {
   const db = await getDB();
@@ -93,4 +93,6 @@ export async function lookupUrl(shortenedId: number) {
   //   //wasn't sure if I should return null or an error, but I went with null for now
   //   return null; 
   // }
+
+  return result.original
 }
